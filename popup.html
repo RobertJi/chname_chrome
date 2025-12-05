@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body {
+      width: 400px;
+      padding: 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+    }
+    h1 {
+      margin: 0 0 20px 0;
+      font-size: 20px;
+      color: #333;
+    }
+    .switch-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding: 10px;
+      background: #f5f5f5;
+      border-radius: 5px;
+    }
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 50px;
+      height: 24px;
+    }
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      transition: .4s;
+      border-radius: 24px;
+    }
+    .slider:before {
+      position: absolute;
+      content: "";
+      height: 18px;
+      width: 18px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .4s;
+      border-radius: 50%;
+    }
+    input:checked + .slider {
+      background-color: #4CAF50;
+    }
+    input:checked + .slider:before {
+      transform: translateX(26px);
+    }
+    .rules-container {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    .rule-item {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+      padding: 10px;
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+    .rule-item input {
+      flex: 1;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      font-size: 14px;
+    }
+    .rule-item input:focus {
+      outline: none;
+      border-color: #4CAF50;
+    }
+    .btn-remove {
+      background: #f44336;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-remove:hover {
+      background: #d32f2f;
+    }
+    .btn-add {
+      width: 100%;
+      background: #4CAF50;
+      color: white;
+      border: none;
+      padding: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+    }
+    .btn-add:hover {
+      background: #45a049;
+    }
+    .empty-state {
+      text-align: center;
+      color: #999;
+      padding: 20px;
+    }
+    .arrow {
+      display: flex;
+      align-items: center;
+      color: #666;
+      font-size: 18px;
+    }
+    .rule-item input.readonly {
+      background-color: #f5f5f5;
+      color: #666;
+      cursor: not-allowed;
+    }
+    .btn-remove:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+    .config-info {
+      font-size: 12px;
+      color: #666;
+      margin-top: 5px;
+      padding: 5px;
+      background: #f9f9f9;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+<body>
+  <h1>文本替换配置</h1>
+  
+  <div class="switch-container">
+    <span>启用替换</span>
+    <label class="switch">
+      <input type="checkbox" id="enabled">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="switch-container">
+    <span>使用配置文件规则</span>
+    <label class="switch">
+      <input type="checkbox" id="useDefaultRules">
+      <span class="slider"></span>
+    </label>
+  </div>
+
+  <div class="rules-container" id="rulesContainer">
+    <!-- 规则列表将在这里动态生成 -->
+  </div>
+
+  <button class="btn-add" id="addRule">添加替换规则</button>
+
+  <script src="popup.js"></script>
+</body>
+</html>
+
